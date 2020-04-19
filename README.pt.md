@@ -164,14 +164,14 @@ the hard way to paste these simple commands into this complicated system.
 
 #### flask-migrate
 
-    user @ server: goworking-tables $ pipenv run flask db init
-    Loading .env environment variables ...
-    user @ server: goworking-tables $ pipenv run flask db upgrade
-    Loading .env environment variables ...
-    INFO [alembic.runtime.migration] Context impl MySQLImpl.
-    INFO [alembic.runtime.migration] Will takes over non-transactional DDL.
-    INFO [alembic.runtime.migration] Running upgrade -> fead50b08d21, empty message
-    INFO [alembic.runtime.migration] Running upgrade fead50b08d21 -> dc7d560eee94, empty message
+    user@server:goworking-mesas$ pipenv run flask db init
+    Loading .env environment variables...
+    user@server:goworking-mesas$ pipenv run flask db upgrade
+    Loading .env environment variables...
+    INFO  [alembic.runtime.migration] Context impl MySQLImpl.
+    INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+    INFO  [alembic.runtime.migration] Running upgrade  -> fead50b08d21, empty message
+    INFO  [alembic.runtime.migration] Running upgrade fead50b08d21 -> dc7d560eee94, empty message
 
 ### gunicorn
 
@@ -179,19 +179,19 @@ I use systemd.
 
 There is an example systemd file in * doc / gunicorn-goworking.service * .
 
-    user @ server: goworking-tables $ sudo cp gunicorn-goworking.service / lib / systemd / system /
-    user @ server: goworking-tables $ sudo systemctl enable gunicorn-goworking.service
-    user @ server: goworking-tables $ sudo systemctl start gunicorn-goworking.service
+    user@server:goworking-mesas$ sudo cp gunicorn-goworking.service /lib/systemd/system/
+    user@server:goworking-mesas$ sudo systemctl enable gunicorn-goworking.service
+    user@server:goworking-mesas$ sudo systemctl start gunicorn-goworking.service
 
 ### Nginx
 
 Sample file in * doc / goworking.conf * .
 
-    user @ server: goworking-tables $ sudo cp doc / goworking.conf / etc / nginx / sites-available /
-    user @ server: goworking-tables $ pushd / etc / nginx / sites-enabled
-    user @ server: / etc / nginx / sites-enabled $ sudo ln -s ../sites-available/goworking.conf
-    user @ server: / etc / nginx / sites-enabled $ popd
-    user @ server: goworking-tables $ sudo nginx -t
+    user@server:goworking-mesas$ sudo cp doc/goworking.conf /etc/nginx/sites-available/
+    user@server:goworking-mesas$ pushd /etc/nginx/sites-enabled
+    user@server:/etc/nginx/sites-enabled$ sudo ln -s ../sites-available/goworking.conf
+    user@server:/etc/nginx/sites-enabled$ popd
+    user@server:goworking-mesas$ sudo nginx -t
     nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
     nginx: configuration file /etc/nginx/nginx.conf test is successful
-    user @ server: goworking-tables $ sudo systemctl -l reload nginx.service
+    user@server:goworking-mesas$ sudo systemctl -l reload nginx.service
